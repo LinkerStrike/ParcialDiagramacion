@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Registro{% endblock %}
+{% block page_content %}
+<form method="POST" action="/register">
+    <table cellspacing="10">
+        <br>
+        <tr>
+            <td>{{ form.csrf_token }}
+                {{ form.name.label }} </td><td>&nbsp;</td><td> {{ form.name(size=20) }} </td>
+	   </tr>
+    
+        <tr>{{ form.csrf_token }}
+            <td>{{ form.pass1.label }} </td><td>&nbsp;</td><td> {{ form.pass1(size=20) }} </td>
+	   </tr>
+    
+        <tr>{{ form.csrf_token }}
+            <td>{{ form.pass2.label }} </td><td>&nbsp;</td><td> {{ form.pass2(size=20) }} </td>
+	   </tr>
+    </table>
+
+    {% if form.errors %}
+    
+    <ul class="errors" style="color:blue;" >
+        {% for error in form.name.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+        {% for error in form.pass1.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+        {% for error in form.pass2.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    
+    {% endif %}
+    <input type="submit" value="Enviar">
+</form>
+<br>    
+<p>Si ya te registraste, <a href="/iniciarsesion">Inicia Sesion</a></p>
+{% endblock %}s

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Inicio Sesion{% endblock %}
+{% block page_content %}
+{% if username %}
+<h1> Ya iniciaste sesion como {{username}}, <a href="/desloguearse">Salir</a> </h1>
+{% else %}
+<form method="POST" action="/iniciarsesion">
+    {{ form.csrf_token }}
+    <table cellspacing="10">
+    	<br>
+    	<tr>
+    		<td> {{ form.nombrese.label }} </td><td>&nbsp;</td><td> {{ form.nombrese(size=20) }} </td>
+		</tr>
+    {{ form.csrf_token }}
+    	<tr>
+    		<td>{{ form.contrase.label }} </td><td>&nbsp;</td><td> {{ form.contrase(size=20) }} </td>
+    	</tr>
+    </table>
+	
+	{% if form.errors %}
+	
+	<ul class="errors" style="color:blue;" >
+	    {% for error in form.nombrese.errors %}
+	      <li>{{ error }}</li>
+	    {% endfor %}
+	    {% for error in form.contrase.errors %}
+	      <li>{{ error }}</li>
+	    {% endfor %}
+	    </ul>
+	{% endif %}
+    <input type="submit" value="Enviar">
+</form>
+<br>	
+<p><a href="/register">Registrate</a> para poder iniciar sesion</p>
+{% endif %}
+{% endblock %}
